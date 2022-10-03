@@ -1,10 +1,11 @@
 print('II  |  I')
 print('=========')
 print('III | IV')
-x = int(input('Введите координату X: '))
-y = int(input('Введите координату Y: '))
-if x == 0 or y == 0: print('Координаты не могут быть равны 0!')
-elif x > 0 and y > 0: print('Точка находится в I четверти')
-elif x > 0 and y < 0: print('Точка находится в IV четверти')
-elif x < 0 and y > 0: print('Точка находится в II четверти')
-elif x < 0 and y < 0: print('Точка находится в III четверти')
+quat = int(input('Введите номер четверти: '))
+if quat < 1 or quat > 4: print('Такой четверти нет!')
+elif quat == 1: print('X > 0, Y > 0')
+elif quat == 2: print('X < 0, Y > 0')
+elif quat == 3: print('X < 0, Y < 0')
+elif quat == 4: print('X > 0, Y < 0')
+
+
