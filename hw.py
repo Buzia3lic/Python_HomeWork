@@ -1,11 +1,13 @@
-print('II  |  I')
-print('=========')
-print('III | IV')
-quat = int(input('Введите номер четверти: '))
-if quat < 1 or quat > 4: print('Такой четверти нет!')
-elif quat == 1: print('X > 0, Y > 0')
-elif quat == 2: print('X < 0, Y > 0')
-elif quat == 3: print('X < 0, Y < 0')
-elif quat == 4: print('X > 0, Y < 0')
+from turtle import distance
+
+
+x1 = int(input('Введите значение X для ПЕРВОЙ точки: '))
+y1 = int(input('Введите значение Y для ПЕРВОЙ точки: '))
+x2 = int(input('Введите значение X для ВТОРОЙ точки: '))
+y2 = int(input('Введите значение Y для ВТОРОЙ точки: '))
+print(f'Точка один: ({x1}, {y1})')
+print(f'Точка два: ({x2}, {y2})')
+dist = ((x1 - x2) ** 2 + (y1 - y2) **2) ** 0.5;
+print('Расстояние между точками равно:', round(dist, 3))
 
 
