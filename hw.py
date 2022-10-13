@@ -1,7 +1,9 @@
-import random
 
-def NewList():
-    num = int(input('Введите число элементов: '))
+import random
+import math
+
+def NewList(num):
+    
     newlist = []
     for el in range(num):
         newlist.append(random.randrange(10))
@@ -11,128 +13,181 @@ task = int(input('Введите номер задачи: '))
 print('#################################################################################')
 
 #Задача 1
-# Задайте список из нескольких чисел. Напишите программу, которая найдёт сумму элементов списка, стоящих на нечётной позиции.
+# Вычислить число c заданной точностью d
 # Пример:
-# - [2, 3, 5, 9, 3] -> на нечётных позициях элементы 3 и 9, ответ: 12
+# - при $d = 0.001, π = 3.141.$    $10^{-1} ≤ d ≤10^{-10}$
 
 if task == 1:
-    print('Программа ищет сумму элементов списка, стоящих на нечётной позиции.')
+    print('Программа вычисляет число c заданной точностью d')
     print('#################################################################################')
-    newlist = NewList()
-    sum = 0
-    print(newlist)
-    for i in range(1,len(newlist),2):
-        sum += newlist[i]
-    print(f'Сумма элементов равна: {sum}')
+    d = float(input('Задайте точность $d (например 0.001): '))
+    count = 0
+    while d != 1:
+        d *= 10
+        count += 1
+    p = round(math.pi, count)
+
+    print(p)
+
 
 #######################################################
 
 #Задача 2
-# Напишите программу, которая найдёт произведение пар чисел списка. Парой считаем первый и последний элемент, второй и предпоследний и т.д.
+# Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
 # Пример:
-# - [2, 3, 4, 5, 6] => [12, 15, 16];
-# - [2, 3, 5, 6] => [12, 15]
+# N = 20 => [2, 2, 5]
 
 elif task == 2:
-    print('Программа ищет произведение пар чисел списка. Парой считаем первый и последний элемент, второй и предпоследний и т.д.')
+    print('Программа составляет список простых множителей числа N.')
     print('#################################################################################')
-    newlist = NewList()
+    num = int(input('Напишите число: '))
     res = []
-    print(newlist)
-    if len(newlist)%2 == 0:
-        for i in range(len(newlist)//2):
-            res.append(newlist[i] * newlist[len(newlist) - 1 - i])
-    else:
-        for i in range(len(newlist)//2 + 1):
-            res.append(newlist[i] * newlist[len(newlist) - 1 - i])
+    d = 2
+    while d**2 <= num:
+        if num % d == 0:
+            res.append(d)
+            num = num // d
+        else:
+            d += 1
+    res.append(num)
+
     print(res)
 
 
-########################################################3
+# ########################################################3
 
-#Задача 3
-# Задайте список из вещественных чисел. 
-# Напишите программу, которая найдёт разницу между максимальным и минимальным значением дробной части элементов.
-# Пример:
-# - [1.1, 1.2, 3.1, 5, 10.01] => 0.19
+# Задача 3
+# Задайте последовательность чисел. Напишите программу, которая выведет список неповторяющихся элементов исходной последовательности.
 
 elif task == 3:
-    print('Программа ищет разницу между максимальным и минимальным значением дробной части элементов.')
+    print('Программа выводит список неповторяющихся элементов исходной последовательности.')
     print('#################################################################################')
     num = int(input('Введите число элементов: '))
-    newlist = []
-    res = []
-    for el in range(num):
-        newlist.append(round(random.uniform(0, 10), 2))
-    print(newlist)
-    for i in range(len(newlist)):
-        res.append(int((newlist[i] * 100) % 100))
-    for j in range(len(res)):
-        for i in range(len(res) - 1):
-            if res[i + 1] < res[i]: 
-                temp = res[i]
-                res[i] = res[i + 1]
-                res[i + 1] = temp
-    res = [el / 100 for el in res]
-    for el in res:
-        if el == 0:
-            res.remove(el)
-    print(f'Разница между минимальным {res[0]} и максимальным {res[len(res) - 1]} равна: {round(((res[len(res) - 1] - res[0])), 2)}')
+    newList = NewList(num)
+    voc = {}
+    print(newList)
+    for el in newList:
+        voc[el] = voc.get(el, 0) + 1
+    newList.clear()
+    for key, val in voc.items():
+        if val == 1: 
+            newList.append(key)
+    print(newList)
 
-
-########################################################3
+# ########################################################3
 
 #Задача 4
-# Напишите программу, которая будет преобразовывать десятичное число в двоичное.
+# Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена.
+# Записать в файл многочлен степени k.
 # Пример:
-# - 45 -> 101101
-# - 3 -> 11
-# - 2 -> 10
+# - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 
 elif task == 4:
-    print('Программа преобразует десятичное число в двоичное.')
+    print('Программа записывает в файл многочлен степени k.')
     print('#################################################################################')
-    num = int(input('Введите число: '))
-    res = []
-    while num != 0:
-        res.append(num - num//2 * 2)
-        num = num // 2
-    res = res [:: -1]
-    print(*res)
+    k = int(input('Введите степень для многочелена: '))
+    numbers = NewList(k + 1)
+    print('Список коэффициентов: ', numbers)
+    equ = []
+    for el in numbers:
+        if k == 0:
+            if el != 0:
+                equ.append(str(el))
+                continue
+        if el == 0:
+            k -= 1  
+            continue
+        else:
+            equ.append('x' + str(k) + '*' + str(el))
+            k -= 1
+            continue
+        
+     
+    print('Это уравнение запишем в файл: ')
+    print(*equ, sep=' + ')
+
+    with open('file_out.txt', 'w') as f:
+        print(*equ, sep=' + ', file = f)
+    
 
 ########################################################3
 
 #Задача 5
-#Задайте число. Составьте список чисел Фибоначчи, в том числе для отрицательных индексов.
+#Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
 # Пример:
-# - для k = 8 список будет выглядеть так: [-21 ,13, -8, 5, −3, 2, −1, 1, 0, 1, 1, 2, 3, 5, 8, 13, 21]
+# файл1: 2x^2 + 7x + 5
+# файл2: 4x^2 + 3x + 9
+# результат: 6x^2 + 10x + 14
 
 elif task == 5:
-
-
-    def Fibu(num):
-        if num == 0:
-            newlist = [0]
-        elif num == 1:
-            newlist = [1, 0, 1]
-        else:
-            newlist1 = [0, 1]   
-            for i in range(2, num + 1):
-                newlist1.append(newlist1[i - 1] + newlist1[i - 2])
-            newlist2 = [0, 1]
-            for i in range(2, num + 1):
-                newlist2.append(newlist2[i - 2] - newlist2[i - 1])
-            newlist2 = newlist2[:0: -1]
-            newlist = newlist2 + newlist1
-        return newlist
-
-
-    print('Программа задает список чисел Фибоначчи, в том числе для отрицательных индексов.')
+    print('Программа создает файл, содержащий сумму многочленов.')
     print('#################################################################################')
-    num = int(input('Введите число: '))
-    newlist = Fibu(num)
-    print(newlist)
+    with open('file_input_1.txt', 'r') as f1:
+        data1 = f1.readline()
+    print(data1)
+    list1 = data1.split('+')
+    for k in range(len(list1)):
+        num = ''
+        for i in list1[k]:
+            j = 0
+            if i[j] == 'x':
+                break
+            if i[j].isdigit():
+                num += i[j]
+                j += 1
+        list1[k] = num
+        k += 1
+    list1 = list1[:: -1]
+    
 
+
+    with open('file_input_2.txt', 'r') as f2:
+        data2 = f2.readline()
+    print(data2)
+    list2 = data2.split('+')   
+    for k in range(len(list2)):
+        num = ''
+        for i in list2[k]:
+            j = 0
+            if i[j] == 'x':
+                break
+            if i[j].isdigit():
+                num += i[j]
+                j += 1
+        list2[k] = num
+        k += 1
+    list2 = list2[:: -1]
+    
+
+    listres = []
+
+    for i in range(len(list1)):
+        listres.append(int(list1[i]) + int(list2[i]))
+    for i in range(int(len(list1)), int(len(list2))):
+        listres.append(int(list2[i]))
+    listres = listres[:: -1]
+    
+    k = len(listres) - 1
+    equ = []
+    for el in listres:
+        if k == 0:
+            if el != 0:
+                equ.append(str(el))
+                continue
+        if el == 0:
+            k -= 1  
+            continue
+        else:
+            equ.append('x' + str(k) + '*' + str(el))
+            k -= 1
+            continue
+        
+     
+    print('Это уравнение запишем в файл: ')
+    print(*equ, sep=' + ')
+
+    with open('file_out.txt', 'w') as f:
+        print(*equ, sep=' + ', file = f)
 ########################3
 
 else:
