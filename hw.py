@@ -1,6 +1,12 @@
 
+from inspect import isdatadescriptor
+from operator import truediv
 import random
 import math
+from tkinter import N
+import collections
+from turtle import clear
+
 
 task = int(input('Введите номер задачи: '))
 print('#################################################################################')
@@ -98,9 +104,9 @@ elif task == 2:
             print(f'Бот берет конфеты: {x2}')
             table -= x2
             if table == 0:
-                print('#######################')
+                print('#############################')
                 print(f'## Победил "Бот" !!!!!!!!! ##')
-                print('#######################')
+                print('#############################')
                 continue
 
 # ########################################################3
@@ -112,43 +118,109 @@ elif task == 3:
     print('Программа для игры в "Крестики-нолики".')
     print('#################################################################################')
     print('Поле для игры:')
-    battlefiled = '123\n456\n789'
+    
+    win1 = [1, 2, 3]
+    win2 = [4, 5, 6]
+    win3 = [7, 8, 9]
+    win4 = [1, 4, 7]
+    win5 = [2, 5, 8]
+    win6 = [3, 6, 9]
+    win7 = [1, 5, 9]
+    win8 = [3, 5, 7]
+    
+    battlefiled = ' 1 2 3 \n 4 5 6 \n 7 8 9 '
     print(battlefiled)
+    checker = True
+    turn = 1
+    listX = []
+    listO = []
+    while checker == True:
+        if turn == 1:
+            checker = False
+            bf = list(battlefiled)
+
+            x1 = input(f'Игрок 1 введите номер для X: ')
+
+            listX.append(int(x1))
+            
+            for i in range(len(bf)):
+                if bf[i] == x1:
+                    bf[i] = 'X'
+            
+            for i in bf:
+                if i.isdigit():
+                    checker = True
+            
+            battlefiled = "".join(bf)
+            print(battlefiled)
+
+            if collections.Counter(listX) == collections.Counter(win1) or collections.Counter(listX) == collections.Counter(win2) or collections.Counter(listX) == collections.Counter(win3)or collections.Counter(listX) == collections.Counter(win4) or collections.Counter(listX) == collections.Counter(win5) or collections.Counter(listX) == collections.Counter(win6) or collections.Counter(listX) == collections.Counter(win7) or collections.Counter(listX) == collections.Counter(win8):
+                print(f'Победитель Игрок номер "{turn}" !!')
+                checker = False
+                continue
+
+
+            turn = 2
+            
+            continue
+
+        if turn == 2:
+            checker = False
+            bf = list(battlefiled)
+
+            x2 = input(f'Игрок 2 введите номер для O: ')
+
+            listO.append(int(x2))
+            
+            for i in range(len(bf)):
+                if bf[i] == x2:
+                    bf[i] = 'O'
+            
+            for i in bf:
+                if i.isdigit():
+                    checker = True
+            
+            battlefiled = "".join(bf)
+            print(battlefiled)
+
+            if collections.Counter(listO) == collections.Counter(win1) or collections.Counter(listO) == collections.Counter(win2) or collections.Counter(listO) == collections.Counter(win3)or collections.Counter(listO) == collections.Counter(win4) or collections.Counter(listO) == collections.Counter(win5) or collections.Counter(listO) == collections.Counter(win6) or collections.Counter(listO) == collections.Counter(win7) or collections.Counter(listO) == collections.Counter(win8):
+                print(f'Победитель Игрок номер "{turn}" !!')
+                checker = False
+                continue
+
+            turn = 1    
+    
 
 # ########################################################3
 
 #Задача 4
-# Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена.
-# Записать в файл многочлен степени k.
+# Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 # Пример:
-# - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
+# Введите текст для кодировки: WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW
+# Текст после кодировки: 12W1B12W3B24W1B14W
+# Текст после дешифровки: WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW
 
 elif task == 4:
-    print('Программа записывает в файл многочлен степени k.')
+    print('RLE алгоритм: модуль сжатия и восстановления данных')
     print('#################################################################################')
-    k = int(input('Введите степень для многочелена: '))
-    numbers = NewList(k + 1)
-    print('Список коэффициентов: ', numbers)
-    equ = []
-    for el in numbers:
-        if k == 0:
-            if el != 0:
-                equ.append(str(el))
-                continue
-        if el == 0:
-            k -= 1  
-            continue
+    data = input('Введите текст: ')
+    res = []
+    counter = 1
+    sbl = ''
+    for i in range(1, len(data)):
+        if data[i] == data[i - 1]:
+            counter += 1
         else:
-            equ.append('x' + str(k) + '*' + str(el))
-            k -= 1
-            continue
-        
-     
-    print('Это уравнение запишем в файл: ')
-    print(*equ, sep=' + ')
+            res.append((counter, data[i - 1]))
+            counter = 1
+    res.append((counter, data[i]))
+    
+    for i in res:
+        sbl += str(i)
+    print(res)
 
-    with open('file_out.txt', 'w') as f:
-        print(*equ, sep=' + ', file = f)
+
+    
     
 
 ########################################################3
