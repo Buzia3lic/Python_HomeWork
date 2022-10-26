@@ -216,8 +216,16 @@ elif task == 4:
     res.append((counter, data[i]))
     
     for i in res:
-        sbl += str(i)
-    print(res)
+        for j in i:
+            sbl += str(j)
+    print('После сжатия: ', sbl)
+
+    sbl = ''
+
+    for i in res:
+        sbl += i[0] * i[1]
+            
+    print('После восстановления: ', sbl)
 
 
     
