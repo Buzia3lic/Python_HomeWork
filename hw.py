@@ -56,4 +56,16 @@ import math
 
 ##########################################
 
-3. 
+# 3. print('Программа выводит список неповторяющихся элементов исходной последовательности.')
+
+num = int(input('Введите число элементов: '))
+newList = NewList(num)
+voc = {}
+print(newList)
+for el in newList:
+    voc[el] = voc.get(el, 0) + 1
+newList.clear()
+for key, val in voc.items():
+    if val == 1: 
+        newList.append(key)
+print(newList)
