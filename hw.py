@@ -58,4 +58,20 @@ import random
 
 ##########################################
 
-# # 3. 
+# # # 3. # Напишите программу, которая принимает на вход число N и выдает набор произведений чисел от 1 до N.
+# # Пример:
+# # - пусть N = 4, тогда [ 1, 2, 6, 24 ] (1, 1*2, 1*2*3, 1*2*3*4)
+
+# def Mult(num):
+#     res = 1
+#     for i in range(1, num + 1):
+#         res *= i
+#     return res
+
+# num = int(input('Введите число: '))
+# temp = []
+# for i in range(1, num + 1):
+#     temp.append(i)
+
+# res = list(map(lambda x: Mult(x) ,temp))
+# print(res)
