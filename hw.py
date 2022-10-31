@@ -58,30 +58,4 @@ import random
 
 ##########################################
 
-# 3. print('Программа выводит список неповторяющихся элементов исходной последовательности.')
-
-def NewList(num):
-    
-    newlist = []
-    for el in range(num):
-        newlist.append(random.randrange(10))
-    return newlist
-
-num = int(input('Введите число элементов: '))
-
-newList = NewList(num)
-
-voc = {}
-
-print(newList)
-
-for el in newList:
-    voc[el] = voc.get(el, 0) + 1
-newList.clear()
-
-# for key, val in voc.items():
-#     if val == 1: 
-#         newList.append(key)
-# print(newList)
-
-print(list(filter(
+# # 3. 
